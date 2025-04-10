@@ -311,4 +311,11 @@ export class SimpleLexer<const D extends SimpleLexerDefinitions> {
             offset = token.nextOffset;
         }
     }
+
+    /**
+     * Returns a copy of the internal match pattern.
+     */
+    matchPattern() {
+        return new RegExp(this.#matchPattern);
+    }
 }

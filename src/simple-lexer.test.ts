@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertStrictEquals } from "@std/assert";
 
 import { SimpleLexer } from "./simple-lexer.ts";
 
@@ -79,4 +79,139 @@ Deno.test("SimpleLexer.prototype.tokenize()", () => {
     ]);
 });
 
-// TODO: Add tests for pattern flags.
+Deno.test("SimpleLexer correctly sets 'ignoreCase' flag", async (t) => {
+    await t.step("no option specified", () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                word: /\w+/,
+                space: " ",
+            }
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "y");
+    })
+
+    await t.step("ignoreCase: false", () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                word: /\w+/,
+                space: " ",
+            },
+            ignoreCase: false
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "y");
+    })
+
+    await t.step("ignoreCase: true", () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                word: /\w+/,
+                space: " ",
+            },
+            ignoreCase: true
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "iy");
+    });
+
+    await t.step("ignoreCase flag in token pattern has no effect", () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                word: /\w+/i,
+                space: " ",
+            }
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "y");
+    });
+});
+
+Deno.test("SimpleLexer correctly sets Unicode flag", async (t) => {
+    await t.step("first RegExp pattern has no Unicode flags", () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                "aaa": "aaa",
+                "bbb": "bbb",
+                "ccc": "ccc",
+                word: /\w+/,
+                space: " ",
+            },
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "y");
+    });
+
+    await t.step('first RegExp pattern uses "u" flag', () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                "aaa": "aaa",
+                "bbb": "bbb",
+                "ccc": "ccc",
+                word: /\w+/u,
+                space: " ",
+            },
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "uy");
+    });
+
+    await t.step('first RegExp pattern uses "v" flag', () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                "aaa": "aaa",
+                "bbb": "bbb",
+                "ccc": "ccc",
+                word: /\w+/v,
+                space: " ",
+            },
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "vy");
+    });
+
+    await t.step("unicodeFlag: null", () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                "aaa": "aaa",
+                "bbb": "bbb",
+                "ccc": "ccc",
+                word: /\w+/v,
+                space: " ",
+            },
+            unicodeFlag: null,
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "y");
+    });
+
+    await t.step('unicodeFlag: "u"', () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                "aaa": "aaa",
+                "bbb": "bbb",
+                "ccc": "ccc",
+                word: /\w+/v,
+                space: " ",
+            },
+            unicodeFlag: "u",
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "uy");
+    });
+
+    await t.step('unicodeFlag: "v"', () => {
+        const lexer = new SimpleLexer({
+            tokens: {
+                "aaa": "aaa",
+                "bbb": "bbb",
+                "ccc": "ccc",
+                word: /\w+/v,
+                space: " ",
+            },
+            unicodeFlag: "v",
+        });
+
+        assertStrictEquals(lexer.matchPattern().flags, "vy");
+    });
+});
