@@ -26,6 +26,6 @@
         "docs:generate": "deno doc --html --name=\"Simple Lexer\" ./mod.ts && cp ./docs-extras/_config.yml ./docs/_config.yml"
     },
     "imports": {
-        "@std/assert": "jsr:@std/assert@^1.0.2"
+        "@std/assert": "jsr:@std/assert@^1.0.12"
     }
 }
