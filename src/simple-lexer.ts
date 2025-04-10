@@ -160,11 +160,11 @@ function _getRegExpFlags(d: SimpleLexerDefinitions) {
             flags.push(d.unicodeFlag);
             break;
         default:
-            case undefined:
-                if (autoUnicodeFlag !== null) {
-                    flags.push(autoUnicodeFlag);
-                }
-                break;
+        case undefined:
+            if (autoUnicodeFlag !== null) {
+                flags.push(autoUnicodeFlag);
+            }
+            break;
     }
 
     return flags.join("");

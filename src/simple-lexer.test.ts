@@ -85,11 +85,11 @@ Deno.test("SimpleLexer correctly sets 'ignoreCase' flag", async (t) => {
             tokens: {
                 word: /\w+/,
                 space: " ",
-            }
+            },
         });
 
         assertStrictEquals(lexer.matchPattern().flags, "y");
-    })
+    });
 
     await t.step("ignoreCase: false", () => {
         const lexer = new SimpleLexer({
@@ -97,11 +97,11 @@ Deno.test("SimpleLexer correctly sets 'ignoreCase' flag", async (t) => {
                 word: /\w+/,
                 space: " ",
             },
-            ignoreCase: false
+            ignoreCase: false,
         });
 
         assertStrictEquals(lexer.matchPattern().flags, "y");
-    })
+    });
 
     await t.step("ignoreCase: true", () => {
         const lexer = new SimpleLexer({
@@ -109,7 +109,7 @@ Deno.test("SimpleLexer correctly sets 'ignoreCase' flag", async (t) => {
                 word: /\w+/,
                 space: " ",
             },
-            ignoreCase: true
+            ignoreCase: true,
         });
 
         assertStrictEquals(lexer.matchPattern().flags, "iy");
@@ -120,7 +120,7 @@ Deno.test("SimpleLexer correctly sets 'ignoreCase' flag", async (t) => {
             tokens: {
                 word: /\w+/i,
                 space: " ",
-            }
+            },
         });
 
         assertStrictEquals(lexer.matchPattern().flags, "y");
