@@ -9,7 +9,8 @@ const _REGEXP_SYNTAX_CHARACTER_PATTERN = /[\^$\\.*+?()[\]{}|]/g;
  * meanings.
  *
  * The output of this function should **NOT** be placed inside a character class
- * or other weird, non-concatenable positions of a `RegExp`.
+ * or other weird, non-concatenable positions of a `RegExp`. Special characters
+ * inside character classes are NOT escaped.
  *
  * The characters escaped are: `^ $ \ . * + ? ( ) [ ] { } |`
  *

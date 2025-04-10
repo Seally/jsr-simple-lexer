@@ -1,4 +1,4 @@
-import { escapeRegExp } from "./escape-regexp.ts";
+import { escapeRegExp } from "./_escape-regexp.ts";
 
 type _RegExpFlags = "d" | "g" | "i" | "m" | "s" | "u" | "v" | "y";
 type _RegExpUnicodeFlag = null | "u" | "v";
