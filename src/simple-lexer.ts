@@ -315,7 +315,7 @@ export class SimpleLexer<const D extends SimpleLexerDefinitions> {
     /**
      * Returns a copy of the internal match pattern.
      */
-    matchPattern() {
+    matchPattern(): RegExp {
         return new RegExp(this.#matchPattern);
     }
 }
