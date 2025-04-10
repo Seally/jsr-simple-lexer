@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SimpleLexerDefinitions.tokens - Simple Lexer documentation</title>
+  <title>SimpleLexerDefinitions.unicodeFlag - Simple Lexer documentation</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="doc-current-file" content=".">
@@ -23,7 +23,7 @@
 	xmlns="http://www.w3.org/2000/svg">
 	<path fill-rule="evenodd" clip-rule="evenodd" d="M5.76748 11.8159C5.5378 11.577 5.54525 11.1972 5.78411 10.9675L8.93431 8L5.78411 5.0325C5.54525 4.80282 5.5378 4.423 5.76748 4.18413C5.99715 3.94527 6.37698 3.93782 6.61584 4.1675L10.2158 7.5675C10.3335 7.68062 10.4 7.83679 10.4 8C10.4 8.16321 10.3335 8.31938 10.2158 8.4325L6.61584 11.8325C6.37698 12.0622 5.99715 12.0547 5.76748 11.8159Z" fill="currentColor" />
 </svg>
-</span><ul><li><a href="..&#x2F;.&#x2F;.&#x2F;~&#x2F;SimpleLexerDefinitions.html" class="contextLink">SimpleLexerDefinitions</a></li><span>.</span><li>tokens</li></ul></ul>
+</span><ul><li><a href="..&#x2F;.&#x2F;.&#x2F;~&#x2F;SimpleLexerDefinitions.html" class="contextLink">SimpleLexerDefinitions</a></li><span>.</span><li>unicodeFlag</li></ul></ul>
 </div>
 
       <input
@@ -33,11 +33,11 @@
         class="py-2 px-2.5 rounded text-sm border border-gray-300 bg-transparent" />
   </div>
 </nav>
-<div id="searchResults"></div><div id="content"><main class="symbolGroup" id="symbol_SimpleLexerDefinitions.tokens"><article>
+<div id="searchResults"></div><div id="content"><main class="symbolGroup" id="symbol_SimpleLexerDefinitions.unicodeFlag"><article>
       <div>
         <div>
           <div class="text-2xl leading-none break-all">
-            <span class="text-Property">property</span>&nbsp;<span class="font-bold">SimpleLexerDefinitions.tokens</span>
+            <span class="text-Property">property</span>&nbsp;<span class="font-bold">SimpleLexerDefinitions.unicodeFlag</span>
           </div></div><a
   class="context_button relative mr-2"
   href="file:&#x2F;&#x2F;&#x2F;D:&#x2F;devel&#x2F;Seally&#x2F;jsr-simple-lexer&#x2F;src&#x2F;simple-lexer.ts"><svg
@@ -63,8 +63,12 @@
   />
 </svg>
 </a>
-</div><div><div class="space-y-7" id=""><div class="markdown"><p>Token definitions for this lexer. Can be specified as an array of token
-definition objects or</p>
+</div><div><div class="space-y-7" id=""><div class="markdown"><p>Sets the Unicode flag to be used in the combined <code>RegExp</code>.</p>
+<p>Valid values are: <code>null</code>, <code>&quot;u&quot;</code>, and `&quot;v&quot;.</p>
+<p>If this is left unspecified or <code>undefined</code>, it uses the same Unicode flag
+used in the first <code>RegExp</code>-based token pattern specifed in <code>tokens</code>
+property. If none of the token patterns are declared in <code>RegExp</code> form,
+the flag defaults to <code>&quot;v&quot;</code>.</p>
 </div><section class="section"  id="type"><div>
       <h2 class="anchorable mb-1"><a href="#type" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
@@ -88,10 +92,10 @@ definition objects or</p>
   </defs>
 </svg>
 </a>
-Type</h2></div><div class="space-y-8"><div class=" docEntry" id="variable_SimpleLexerDefinitions_tokens">
+Type</h2></div><div class="space-y-8"><div class=" docEntry" id="variable_SimpleLexerDefinitions_unicodeFlag">
 
   <div class="docEntryHeader">
-    <div><code><span class="font-medium text-stone-500"><span><span>Record</span>&lt;<span>keyof</span> <span>any</span><span>, </span><a href="../././~/SimpleLexerTokenDefinition.html" class="link">SimpleLexerTokenDefinition</a>[<span>"pattern"</span>]&gt;<span> | </span><a href="../././~/SimpleLexerTokenDefinition.html" class="link">SimpleLexerTokenDefinition</a>[]</span></span>
+    <div><code><span class="font-medium text-stone-500"><span>_RegExpUnicodeFlag</span></span>
       </code>
     </div><a
   class="context_button relative mr-2"

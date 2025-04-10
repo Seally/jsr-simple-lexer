@@ -7,13 +7,10 @@
   <meta name="doc-current-file" content=".">
   <link rel="stylesheet" href="..&#x2F;styles.css">
   <link rel="stylesheet" href="..&#x2F;page.css">
-  <link id="ddocResetStylesheet" rel="stylesheet" href="..&#x2F;reset.css">
-
-    <script src="..&#x2F;search_index.js" defer></script>
+  <link id="ddocResetStylesheet" rel="stylesheet" href="..&#x2F;reset.css"><link href="../comrak.css" rel="stylesheet" /><link href="../prism.css" rel="stylesheet" /><script src="../prism.js"></script><script src="..&#x2F;search_index.js" defer></script>
     <script src="..&#x2F;script.js" defer></script>
     <script src="..&#x2F;fuse.js" defer></script>
-    <script src="..&#x2F;search.js" defer></script>
-</head>
+    <script src="..&#x2F;search.js" defer></script></head>
 <body>
 <div class="ddoc">
 <div><nav class="top-0 sticky bg-white z-50 py-3 h-14" id="topnav">
@@ -36,7 +33,7 @@
         class="py-2 px-2.5 rounded text-sm border border-gray-300 bg-transparent" />
   </div>
 </nav>
-<div id="content"><main class="symbolGroup" id="symbol_SimpleLexer"><article>
+<div id="searchResults"></div><div id="content"><main class="symbolGroup" id="symbol_SimpleLexer"><article>
       <div>
         <div>
           <div class="text-2xl leading-none break-all">
@@ -68,9 +65,8 @@
 </a>
 </div><div><div class="space-y-7" id=""><div class="markdown"><p>A very basic lexer that simply just takes string and <code>RegExp</code> patterns and
 spits out the associated tokens with no advanced bells and whistles.</p>
-</div><section class="section" id="examples">
-  <div>
-	  <h2 class="anchorable mb-1"><a href="#examples" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+</div><section class="section"  id="examples"><div>
+      <h2 class="anchorable mb-1"><a href="#examples" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -92,7 +88,7 @@ spits out the associated tokens with no advanced bells and whistles.</p>
   </defs>
 </svg>
 </a>
-Examples</h2></div><div class="space-y-8"><div class="anchorable example"><a href="#example_0" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+Examples</h2></div><div class="space-y-8"><div class="anchorable"><a href="#example_0" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -114,24 +110,9 @@ Examples</h2></div><div class="space-y-8"><div class="anchorable example"><a hre
   </defs>
 </svg>
 </a>
-<details id="example_0" open>
-    <summary>
-      <div>&#x25B6;</div><div class="markdown"><p>Example 1</p>
-</div></summary>
-    <div><div class="markdown"><pre class="highlight"><code><span style="font-weight:bold;color:#a71d5d;">const </span><span style="color:#0086b3;">lexer </span><span style="font-weight:bold;color:#a71d5d;">= new </span><span style="font-weight:bold;color:#795da3;">SimpleLexer</span><span style="color:#323232;">({
-</span><span style="color:#323232;">    tokens: {
-</span><span style="color:#323232;">        inlineWhitespace: </span><span style="color:#183691;">/</span><span style="color:#0086b3;">[ \t]</span><span style="font-weight:bold;color:#a71d5d;">+</span><span style="color:#183691;">/</span><span style="font-weight:bold;color:#a71d5d;">u</span><span style="color:#323232;">,
-</span><span style="color:#323232;">        lineEnding: </span><span style="color:#183691;">/</span><span style="color:#0086b3;">\r\n</span><span style="font-weight:bold;color:#a71d5d;">?|</span><span style="color:#0086b3;">[\n\f\v\u2028\u2029]</span><span style="color:#183691;">/</span><span style="font-weight:bold;color:#a71d5d;">u</span><span style="color:#323232;">,
-</span><span style="color:#323232;">        word: </span><span style="color:#183691;">/</span><span style="color:#0086b3;">[</span><span style="font-weight:bold;color:#a71d5d;">^ </span><span style="color:#0086b3;">\t\r\n\f\v\u2028\u2029]</span><span style="font-weight:bold;color:#a71d5d;">+</span><span style="color:#183691;">/</span><span style="font-weight:bold;color:#a71d5d;">u</span><span style="color:#323232;">,
-</span><span style="color:#323232;">    }
-</span><span style="color:#323232;">});
-</span><span style="color:#323232;">
-</span><span style="font-weight:bold;color:#a71d5d;">const </span><span style="color:#0086b3;">tokens </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">lexer.</span><span style="font-weight:bold;color:#795da3;">tokenize</span><span style="color:#323232;">(input);
-</span><span style="color:#323232;">
-</span><span style="font-weight:bold;color:#a71d5d;">for </span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">const </span><span style="color:#0086b3;">token </span><span style="font-weight:bold;color:#a71d5d;">of </span><span style="color:#323232;">tokens) {
-</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">// ...
-</span><span style="color:#323232;">}
-</span></code><button class="context_button" data-copy="const lexer = new SimpleLexer({
+<h3 class="example-header"><div class="markdown"><p>Example 1</p>
+</div></h3>
+  <div><div class="markdown"><pre class="highlight"><code class="language-typescript">const lexer = new SimpleLexer({
     tokens: {
         inlineWhitespace: /[ \t]+/u,
         lineEnding: /\r\n?|[\n\f\v\u2028\u2029]/u,
@@ -144,19 +125,34 @@ const tokens = lexer.tokenize(input);
 for (const token of tokens) {
     // ...
 }
-"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="2" y="2" width="7" height="7" fill="none"></rect>
-<rect x="6" y="6" width="7" height="7" fill="none"></rect>
-<path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="#232323"></path>
+</code><button class="context_button" data-copy="const lexer = new SimpleLexer({
+    tokens: {
+        inlineWhitespace: /[ \t]+/u,
+        lineEnding: /\r\n?|[\n\f\v\u2028\u2029]/u,
+        word: /[^ \t\r\n\f\v\u2028\u2029]+/u,
+    }
+});
+
+const tokens = lexer.tokenize(input);
+
+for (const token of tokens) {
+    // ...
+}
+"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="2" width="7" height="7" fill="none"/>
+<rect x="6" y="6" width="7" height="7" fill="none"/>
+<path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="#232323"/>
+</svg>
+<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="#232323" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+<path d="M5 12l5 5l10 -10" />
 </svg>
 </button><code></code></pre>
 </div></div>
-  </details>
 </div>
 </div></section>
-<section class="section" id="constructors">
-  <div>
-	  <h2 class="anchorable mb-1"><a href="#constructors" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+<section class="section"  id="constructors"><div>
+      <h2 class="anchorable mb-1"><a href="#constructors" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -233,9 +229,8 @@ Constructors</h2></div><div class="space-y-8"><div class="anchorable docEntry" i
 </a>
 </div></div>
 </div></section>
-<section class="section" id="type-parameters">
-  <div>
-	  <h2 class="anchorable mb-1"><a href="#type-parameters" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+<section class="section"  id="type-parameters"><div>
+      <h2 class="anchorable mb-1"><a href="#type-parameters" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -311,9 +306,8 @@ Type Parameters</h2></div><div class="space-y-8"><div class="anchorable docEntry
 </a>
 </div></div>
 </div></section>
-<section class="section" id="methods">
-  <div>
-	  <h2 class="anchorable mb-1"><a href="#methods" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
+<section class="section"  id="methods"><div>
+      <h2 class="anchorable mb-1"><a href="#methods" class="anchor" aria-label="Anchor" tabIndex="-1"><svg
   width="16"
   height="16"
   viewBox="0 0 14 14"
@@ -449,17 +443,21 @@ Methods</h2></div><div class="space-y-8"><div class="anchorable docEntry" id="me
     </article></main>
 <div class="toc">
     <div><div class="usageContent">
-    <h3>Usage</h3><div class="markdown"><pre class="highlight"><code><span style="font-weight:bold;color:#a71d5d;">import </span><span style="color:#323232;">{ SimpleLexer } </span><span style="font-weight:bold;color:#a71d5d;">from </span><span style="color:#183691;">"."</span><span style="color:#323232;">;
-</span></code><button class="context_button" data-copy="import { SimpleLexer } from &quot;.&quot;;
-"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="2" y="2" width="7" height="7" fill="none"></rect>
-<rect x="6" y="6" width="7" height="7" fill="none"></rect>
-<path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="#232323"></path>
+    <h3>Usage</h3><div class="markdown"><pre class="highlight"><code class="language-typescript">import { SimpleLexer } from &quot;.&quot;;
+</code><button class="context_button" data-copy="import { SimpleLexer } from &quot;.&quot;;
+"><svg class="copy" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="2" width="7" height="7" fill="none"/>
+<rect x="6" y="6" width="7" height="7" fill="none"/>
+<path d="M1.55566 2.7C1.55566 2.03726 2.09292 1.5 2.75566 1.5H8.75566C9.41841 1.5 9.95566 2.03726 9.95566 2.7V5.1H12.3557C13.0184 5.1 13.5557 5.63726 13.5557 6.3V12.3C13.5557 12.9627 13.0184 13.5 12.3557 13.5H6.35566C5.69292 13.5 5.15566 12.9627 5.15566 12.3V9.9H2.75566C2.09292 9.9 1.55566 9.36274 1.55566 8.7V2.7ZM6.35566 9.9V12.3H12.3557V6.3H9.95566V8.7C9.95566 9.36274 9.41841 9.9 8.75566 9.9H6.35566ZM8.75566 8.7V2.7H2.75566V8.7H8.75566Z" fill="#232323"/>
+</svg>
+<svg class="check" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="#232323" fill="none" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+<path d="M5 12l5 5l10 -10" />
 </svg>
 </button><code></code></pre>
 </div></div><nav class="documentNavigation">
-          <h3>Document Navigation</h3><ul><li><a href="#examples" title="Examples">Examples</a></li><li><ul><li><a href="#example_0" title="Example 1">Example 1</a></li></ul></li><li><a href="#constructors" title="Constructors">Constructors</a></li><li><ul><li><a href="#constructor_0" title="SimpleLexer">SimpleLexer</a></li></ul></li><li><a href="#type-parameters" title="Type Parameters">Type Parameters</a></li><li><ul><li><a href="#type_param_d" title="D">D</a></li></ul></li><li><a href="#methods" title="Methods">Methods</a></li><li><ul><li><a href="#method_match_0" title="match">match</a></li><li><a href="#method_tokenize_0" title="tokenize">tokenize</a></li></ul></nav></div>
-  </div><div id="searchResults"></div></div>
+          <h3>Document Navigation</h3><ul><li><a href="#examples" title="Examples">Examples</a></li><li><ul><li><a href="#example_0" title="Example 1">Example 1</a></li></ul></li><li><a href="#constructors" title="Constructors">Constructors</a></li><li><ul><li><a href="#constructor_0" title="SimpleLexer">SimpleLexer</a></li></ul></li><li><a href="#type-parameters" title="Type Parameters">Type Parameters</a></li><li><ul><li><a href="#type_param_d" title="D">D</a></li></ul></li><li><a href="#methods" title="Methods">Methods</a></li><li><ul><li><a href="#method_match_0" title="match">match</a></li><li><a href="#method_tokenize_0" title="tokenize">tokenize</a></li></ul></li></ul></nav></div>
+  </div></div>
 </div>
 </div>
 </body>

@@ -5,7 +5,7 @@ import { SimpleLexer } from "./simple-lexer.ts";
 Deno.test("SimpleLexer.prototype.tokenize()", () => {
     const lexer = new SimpleLexer({
         tokens: {
-            "whitespace": /\s+/u,
+            "whitespace": /\s+/v,
             "openBrace": "{",
             "closeBrace": "}",
             "openBracket": "[",
@@ -13,9 +13,9 @@ Deno.test("SimpleLexer.prototype.tokenize()", () => {
             "comma": ",",
             "colon": ":",
             "null": "null",
-            "boolean": /true|false/u,
-            "number": /-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?/u,
-            "string": /"(?:[^"\\]|\\(?:["\\\/bfnrt]|u[0-9A-Fa-f]{4}))*"/u,
+            "boolean": /true|false/v,
+            "number": /-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][\-+]?[0-9]+)?/v,
+            "string": /"(?:[^"\\]|\\(?:["\\\/bfnrt]|u[0-9A-Fa-f]{4}))*"/v,
         },
     });
 
@@ -78,3 +78,5 @@ Deno.test("SimpleLexer.prototype.tokenize()", () => {
         },
     ]);
 });
+
+// TODO: Add tests for pattern flags.

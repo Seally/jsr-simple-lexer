@@ -1,5 +1,8 @@
 import { escapeRegExp } from "./escape-regexp.ts";
 
+type _RegExpFlags = "d" | "g" | "i" | "m" | "s" | "u" | "v" | "y";
+type _RegExpUnicodeFlag = null | "u" | "v";
+
 /**
  * A definition for a token type for `SimpleLexer`.
  */
@@ -37,11 +40,25 @@ export type SimpleLexerDefinitions = {
     /**
      * Set this to `true` to make the lexer patterns ignore casing.
      *
-     * This cannot be set on a per-token basis, so if you need mixed case
-     * sensitivity the token patterns must handle this by themselves (note that
-     * flags on the pattern `RegExp`s are ignored).
+     * This cannot be set on a per-token basis. If some tokens are
+     * case-sensitive and some aren't, do not enable ignore and handle this
+     * in the patterns themselves.
+     *
+     * The `"i"` flags on the `RegExp`-based tokens have no effect on the
+     * `RegExp` pattern used by the lexer.
      */
     ignoreCase?: boolean;
+    /**
+     * Sets the Unicode flag to be used in the combined `RegExp`.
+     *
+     * Valid values are: `null`, `"u"`, and `"v".
+     *
+     * If this is left unspecified or `undefined`, it uses the same Unicode flag
+     * used in the first `RegExp`-based token pattern specifed in `tokens`
+     * property. If none of the token patterns are declared in `RegExp` form,
+     * the flag defaults to `"v"`.
+     */
+    unicodeFlag?: _RegExpUnicodeFlag;
 };
 
 /**
@@ -78,6 +95,80 @@ function _cloneTokenDefinition<T extends keyof any>(
 type _ExtractType<D extends SimpleLexerDefinitions["tokens"]> = D extends
     readonly any[] ? D[number]["type"]
     : keyof D;
+
+function _isRegExp(input: unknown): input is RegExp {
+    return input instanceof RegExp;
+}
+
+function _getRegExpUnicodeFlag(pattern: RegExp): _RegExpUnicodeFlag {
+    if (pattern.unicode) {
+        return "u";
+    }
+
+    if (pattern.unicodeSets) {
+        return "v";
+    }
+
+    return null;
+}
+
+type _LogFunction = (message: string) => void;
+
+/**
+ * Determines the Unicode flag from a iterable list of `RegExp` patterns.
+ *
+ * This function also checks for consistency, and produces a warning if the
+ * flags are inconsistent.
+ *
+ * @returns the Unicode flag used for the first `RegExp` pattern in the list, or
+ *          `"v"` if the list is empty.
+ */
+function _getAutoRegExpUnicodeFlag(
+    patterns: Iterable<RegExp>,
+    logWarning: _LogFunction = console.warn,
+): _RegExpUnicodeFlag {
+    let unicodeFlag: _RegExpUnicodeFlag | undefined;
+
+    for (const pattern of patterns) {
+        if (unicodeFlag === undefined) {
+            unicodeFlag = _getRegExpUnicodeFlag(pattern);
+        } else if (unicodeFlag !== _getRegExpUnicodeFlag(pattern)) {
+            logWarning("Inconsistent lexer Unicode flags");
+        }
+    }
+
+    return unicodeFlag === undefined ? "v" : unicodeFlag;
+}
+
+function _getRegExpFlags(d: SimpleLexerDefinitions) {
+    const flags: _RegExpFlags[] = ["y"];
+
+    if (d.ignoreCase) {
+        flags.push("i");
+    }
+
+    const patterns: RegExp[] = Object.values(d.tokens).filter(_isRegExp);
+
+    const autoUnicodeFlag = _getAutoRegExpUnicodeFlag(patterns);
+
+    switch (d.unicodeFlag) {
+        case null:
+            // No flags added.
+            break;
+        case "u":
+        case "v":
+            flags.push(d.unicodeFlag);
+            break;
+        default:
+            case undefined:
+                if (autoUnicodeFlag !== null) {
+                    flags.push(autoUnicodeFlag);
+                }
+                break;
+    }
+
+    return flags.join("");
+}
 
 /**
  * A very basic lexer that simply just takes string and `RegExp` patterns and
@@ -130,7 +221,7 @@ export class SimpleLexer<const D extends SimpleLexerDefinitions> {
                     return `(${source})`;
                 })
                 .join("|"),
-            definition.ignoreCase ? "iuy" : "uy",
+            _getRegExpFlags(definition),
         );
     }
 
