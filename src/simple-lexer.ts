@@ -1,5 +1,3 @@
-import { escapeRegExp } from "./_escape-regexp.ts";
-
 type _RegExpFlags = "d" | "g" | "i" | "m" | "s" | "u" | "v" | "y";
 type _RegExpUnicodeFlag = null | "u" | "v";
 
@@ -213,7 +211,7 @@ export class SimpleLexer<const D extends SimpleLexerDefinitions> {
                     let source: string;
 
                     if (typeof definition.pattern === "string") {
-                        source = escapeRegExp(definition.pattern);
+                        source = RegExp.escape(definition.pattern);
                     } else {
                         source = definition.pattern.source;
                     }
